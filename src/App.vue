@@ -1,13 +1,15 @@
 <template>
   <div id="app">
-    00BFCA05.png
     <h1>黑马头条</h1>
+    <toutiao-icon :icon="'wode'"></toutiao-icon>
     <router-view />
   </div>
 </template>
 
 <script>
+import ToutiaoIcon from "./components/ToutiaoIcon.vue";
 export default {
+  components: { ToutiaoIcon },
   name: "App",
   data() {
     return {};
