@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    00BFCA05.png
     <h1>黑马头条</h1>
     <router-view />
   </div>
