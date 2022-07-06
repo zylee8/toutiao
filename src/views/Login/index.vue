@@ -1,6 +1,12 @@
 <template>
   <div class="login-container">
-    <van-nav-bar title="登录" />
+    <van-nav-bar title="登录">
+      <!-- <template #left>
+        <ToutiaoIcon icon="guanbi1" />
+      </template> -->
+
+      <van-icon slot="left" name="cross" @click="$router.back()" />
+    </van-nav-bar>
     <van-form @submit="onSubmit" ref="form">
       <van-field
         v-model.number="mobile"
@@ -54,14 +60,15 @@
 <script>
 import { userlog, getyzm } from "@/api/user.js";
 import { Toast } from "vant";
+import ToutiaoIcon from "@/components/ToutiaoIcon.vue";
 export default {
   name: "LoginPage",
-  components: {},
+  components: { ToutiaoIcon },
   props: {},
   data() {
     return {
       mobile: "13911111112",
-      code: "", //246810
+      code: "246810", //246810
       isShow: false,
       flag: false,
       // userI: {
@@ -101,8 +108,10 @@ export default {
     async onSubmit(value) {
       try {
         const re = await userlog(value);
-        console.log(re);
+        this.$store.commit("userToken", re.data.data);
+        // console.log(re);
         Toast.success("登录成功");
+        this.$router.push("/");
       } catch (e) {
         Toast.fail(e?.response?.data?.message || "服务器端错误");
       }
@@ -149,5 +158,8 @@ export default {
     color: #666;
     border: none;
   }
+}
+.van-nav-bar .van-icon {
+  color: #fff;
 }
 </style>
